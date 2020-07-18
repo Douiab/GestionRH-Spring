@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8" />
+
+<th:block th:include="fragments/header"></th:block>
+
+<body class="">
+	<div class="wrapper ">
+
+		<th:block th:include="fragments/sidebarLeft :: active('departements')"></th:block>
+
+		<div class="main-panel">
+			<!-- Navbar -->
+			<th:block th:include="fragments/navbar"></th:block>
+			<!-- End Navbar -->
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title ">Simple Table</h4>
+									<p class="card-category">Here is a subtitle for this table</p>
+								</div>
+								<div class="card-body">
+									<!-- <form th:action="@{'/employes/addSousJacent?id=' + ${employe.id}}" -->
+									<fieldset class="scheduler-border">
+    								<legend class="scheduler-border">Add/update Departement</legend>
+									<form th:action="@{/departements/saveDepartement}" method="post"
+										name='f' th:object="${departement}">
+										<div class="row">
+
+											<div class="col-md-4">
+												<input th:field="*{id}" th:value="''" type="hidden"
+														class="form-control"> 
+												<select class="selectpicker"
+													data-style="btn btn-primary btn-round" title="Type"
+													th:field="*{type}">
+													<!--  <option th:each="emp : ${employes}"
+													th:value="${emp.id}"
+													th:text="${emp.firstName} + ' ' + ${emp.lastName}"></option>
+											 -->
+											 
+											<option th:each="type : ${enumTypeDepartement}" th:value="${type}" th:text="${type}"></option>
+												</select>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="bmd-label-floating">label departement</label>
+													<input th:field="*{label}" type="text" th:value="''" class="form-control">
+												</div>
+											</div>
+											<div class="col-md-4">
+												<button type="submit" class="btn btn-primary pull-right"
+												value="Valider" th:text="${departement.id != null} ? 'Modifier' : 'Ajouter'"></button>
+						
+											</div>
+										</div>
+
+						<div class="clearfix"></div>
+										
+									</form>
+									</fieldset>
+									<div class="table-responsive">
+										<table class="table">
+											<thead class=" text-primary">
+												<th>ID</th>
+												<th>Label</th>
+												<th>Type</th>
+												<th></th>
+											</thead>
+											<tbody>
+												<tr th:each="element : ${allDepartements}">
+													<td th:text="${element.id}"></td>
+													<td
+														th:text="${element.label != null} ? ${element.label} : '_'"></td>
+													<td
+														th:text="${element.type != null} ? ${element.type} : '_'"></td>
+
+													<td class="td-actions text-right">
+														<button type="button" rel="tooltip" title="Edit Departement"
+															class="btn btn-primary btn-link btn-sm">
+															<a th:href="@{'/departements/updateDepartement?id=' + ${element.id}}"><i class="material-icons">edit</i></a>
+														</button>
+														<button type="button" rel="tooltip"
+															title="Remove Departement"
+															class="btn btn-danger btn-link btn-sm">
+															<a
+																th:href="@{'/departements/deleteDepartement?id=' + ${element.id}}"><i
+																class="material-icons">close</i></a>
+														</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<th:block th:include="fragments/footer"></th:block>
+		</div>
+	</div>
+
+	<th:block th:include="fragments/sidebarfiltres"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

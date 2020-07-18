@@ -11,6 +11,8 @@ public interface DepartementService {
 	Departement update(Departement departement);
 
     List<Departement> getAll();
+    
+    Departement getById(Long id);
 
     void delete(Long id);
 }

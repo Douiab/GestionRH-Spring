@@ -35,4 +35,9 @@ public class DepartementServiceImp implements DepartementService{
 		departementRepository.deleteById(id);
 	}
 
+	@Override
+	public Departement getById(Long id) {
+		return departementRepository.getOne(id);
+	}
+
 }

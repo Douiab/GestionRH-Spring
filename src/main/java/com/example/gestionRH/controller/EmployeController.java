@@ -10,16 +10,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.example.gestionRH.entites.Departement;
 import com.example.gestionRH.entites.Employe;
 import com.example.gestionRH.service.DepartementService;
@@ -34,27 +31,12 @@ public class EmployeController {
 
 	@Autowired
 	DepartementService departementService;
-
-//	@InitBinder(value = "sousjacents")
-//	protected void initBinder(final WebDataBinder binder) {
-//		binder.registerCustomEditor(Employe.class, new PartPropertyEditor());
-//	}
-//
-//	private static class PartPropertyEditor extends PropertyEditorSupport {
-//		@Override
-//	        public void setAsText(String employeId) {
-//	            final Employe employe = null; // Get part based on the id 
-//	            setValue(employe);
-//	        }
-//
-//		/**
-//		 * This is called when checking if an option is selected
-//		 */
-//		@Override
-//		public String getAsText() {
-//			return (((Employe) getValue()).getId()).toString(); // don't forget null checking
-//		}
-//	}
+	
+	@ModelAttribute("allDepartements")
+	public List<Departement> allDepartements() {
+		List<Departement> departements = departementService.getAll();
+	    return departements;
+	}
 
 	@GetMapping
 	public String getAll(Model model) {
@@ -66,14 +48,6 @@ public class EmployeController {
 	@PostMapping("/saveEmploye")
 	@Transactional
 	public ModelAndView saveEmploye(@ModelAttribute Employe employe) {
-//		Set<Employe> sousjacents = new HashSet<>();
-//		Employe employeS = new Employe();
-//		employeS.setId(3L);
-//		Employe employeD = new Employe();
-//		employeD.setId(4L);
-//		sousjacents.add(employeS);
-//		sousjacents.add(employeD);
-//		employe.setSousjacents(sousjacents);
 		employeService.update(employe);
 		return new ModelAndView("redirect:/employes");
 	}
@@ -82,8 +56,6 @@ public class EmployeController {
 	public String create(Model model) {
 		Employe employe = new Employe();
 		model.addAttribute("employe", employe);
-		List<Departement> departements = departementService.getAll();
-		model.addAttribute("departements", departements);
 		List<Employe> employes = employeService.getAll();
 		model.addAttribute("liste", employes);
 		return "addEmploye";
@@ -93,8 +65,6 @@ public class EmployeController {
 	public String update(@RequestParam(value = "id") Long id, Model model) {
 		Employe employe = employeService.findById(id);
 		model.addAttribute("employe", employe);
-		List<Departement> departements = departementService.getAll();
-		model.addAttribute("departements", departements);
 		List<Employe> employes = employeService.getAll();
 		model.addAttribute("liste", employes);
 		return "addEmploye";

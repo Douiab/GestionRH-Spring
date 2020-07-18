@@ -1,0 +1,43 @@
+<div th:fragment="active(activeroute)">
+	<div class="sidebar" data-color="purple" data-background-color="white"
+		data-image="../assets/img/sidebar-1.jpg">
+		<!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+		<div class="logo">
+			<a href="/" class="simple-text logo-normal"> Gestion Ressources </a>
+		</div>
+		<div class="sidebar-wrapper">
+			<ul class="nav">
+				<li class="nav-item  "><a class="nav-link"
+					href="./dashboard.html"> <i class="material-icons">dashboard</i>
+						<p>Dashboard</p>
+				</a></li>
+				<li class="nav-item"><a class="nav-link" href="./user.html">
+						<i class="material-icons">person</i>
+						<p>User Profile</p>
+				</a></li>
+				<li th:class="${activeroute == 'employes'}? 'nav-item active' : 'nav-item'"><a class="nav-link"
+					href="/employes"> <i class="material-icons">content_paste</i>
+						<p>liste employes</p>
+				</a></li>
+				<li th:class="${activeroute == 'departements'}? 'nav-item active' : 'nav-item'"><a class="nav-link" href="/departements">
+						<i class="material-icons">library_books</i>
+						<p>liste departemets</p>
+				</a></li>
+				<li th:class="${activeroute == 'addEmploye'}? 'nav-item active' : 'nav-item'"><a class="nav-link"
+					href="/employes/addEmploye"> <i class="material-icons">bubble_chart</i>
+						<p>New employe</p>
+				</a></li>
+
+
+				<li class="nav-item active-pro "><a class="nav-link"
+					href="./upgrade.html"> <i class="material-icons">login</i>
+						<p>Log out</p>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
