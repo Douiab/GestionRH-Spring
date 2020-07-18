@@ -1,5 +1,6 @@
 package com.example.gestionRH.entites;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Departement {
+public class Departement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

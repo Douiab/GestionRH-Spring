@@ -17,8 +17,10 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -83,12 +85,12 @@
 			<artifactId>flyway-core</artifactId>
 		</dependency>
 		
-		 <!-- Spring Security 
+		 <!-- Spring Security -->
+		 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>-->
-
+        </dependency>
 
 		<!-- optional, it brings userful tags to display spring security stuff 
         <dependency>

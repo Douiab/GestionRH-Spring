@@ -1,63 +1,48 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<title>Spring Security Example</title>
-
-<!-- this is header-css -->
-<link rel="stylesheet" type="text/css"
-	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-<link rel="stylesheet" th:href="@{/css/main.css}"
-	href="../../css/main.css" />
-
-</head>
-<body>
-
-
-	<div class="container">
-
-		<div class="row" style="margin-top: 20px">
-			<div
-				class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-				<form th:action="@{/login}" method="post">
-					<fieldset>
-						<h1>Please Sign In</h1>
-
-						<div th:if="${param.error}">
-							<div class="alert alert-danger">Invalid username and
-								password.</div>
-						</div>
-						<div th:if="${param.logout}">
-							<div class="alert alert-info">You have been logged out.</div>
-						</div>
-
-						<div class="form-group">
-							<input type="text" name="username" id="username"
-								class="form-control input-lg" placeholder="UserName"
-								required="true" autofocus="true" />
-						</div>
-						<div class="form-group">
-							<input type="password" name="password" id="password"
-								class="form-control input-lg" placeholder="Password"
-								required="true" />
-						</div>
-
-						<div class="row">
-							<div class="col-xs-6 col-sm-6 col-md-6">
-								<input type="submit" class="btn btn-lg btn-primary btn-block"
-									value="Sign In" />
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-6"></div>
-						</div>
-					</fieldset>
-				</form>
-			</div>
-		</div>
-
-	</div>
-
-
-
-</body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>Login</title>
+   </head>
+   <body>
+      
+       
+      <h1>Login</h1>
+       
+      <!-- /login?error=true -->
+      <div th:if="${#request.getParameter('error') == 'true'}"
+            style="color:red;margin:10px 0px;">
+         Login Failed!!!<br />
+         Reason :
+         <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+            th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+         </span>
+            
+      </div>
+      
+      <h3>Enter user name and password:</h3>
+      <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+         <table>
+            <tr>
+               <td>User:</td>
+               <td><input type='text' name='username' value=''></td>
+            </tr>
+            <tr>
+               <td>Password:</td>
+               <td><input type='password' name='password' /></td>
+            </tr>
+            <tr>
+               <td>Remember Me?</td>
+               <td><input type="checkbox" name="remember-me" /></td>
+            </tr>            
+            <tr>
+               <td><input name="submit" type="submit" value="submit" /></td>
+            </tr>
+         </table>
+      </form>
+       
+      <br>
+       
+   </body>
+    
 </html>

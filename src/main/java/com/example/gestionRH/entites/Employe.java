@@ -1,25 +1,27 @@
 package com.example.gestionRH.entites;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.Objects;
 
 @Entity
-public class Employe {
+public class Employe implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -61,6 +63,9 @@ public class Employe {
     
     @OneToMany
     private Set<Employe> sousjacents = new HashSet<>();
+    
+    @ManyToOne
+	private Role role;
     
 	public Long getId() {
 		return id;
@@ -140,29 +145,11 @@ public class Employe {
 	public void setSousjacents(Set<Employe> sousjacents) {
 		this.sousjacents = sousjacents;
 	}
-	
-	
-	
-//	@Override
-//	public int hashCode() {
-//		int hash = 5;
-//		hash = 83 * hash + Objects.hashCode(this.id);
-//		return hash;
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (obj == null) {
-//			return false;
-//		}
-//		if (getClass() != obj.getClass()) {
-//			return false;
-//		}
-//		final Employe other = (Employe) obj;
-//		if (!Objects.equals(this.id, other.id)) {
-//			return false;
-//		}
-//		return true;
-//	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
 }

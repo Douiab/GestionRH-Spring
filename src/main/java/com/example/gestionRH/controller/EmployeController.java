@@ -21,6 +21,7 @@ import com.example.gestionRH.entites.Departement;
 import com.example.gestionRH.entites.Employe;
 import com.example.gestionRH.service.DepartementService;
 import com.example.gestionRH.service.EmployeService;
+import com.example.gestionRH.utils.EncrytedPasswordUtils;
 
 @Controller
 @RequestMapping("/employes")
@@ -48,6 +49,7 @@ public class EmployeController {
 	@PostMapping("/saveEmploye")
 	@Transactional
 	public ModelAndView saveEmploye(@ModelAttribute Employe employe) {
+		employe.setPassword(EncrytedPasswordUtils.encrytePassword(employe.getPassword()));
 		employeService.update(employe);
 		return new ModelAndView("redirect:/employes");
 	}
