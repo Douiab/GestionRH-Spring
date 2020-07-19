@@ -1,7 +1,5 @@
 package com.example.gestionRH.controller;
 
-import java.beans.PropertyEditorSupport;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.gestionRH.entites.Departement;
 import com.example.gestionRH.entites.Employe;
+import com.example.gestionRH.entites.Role;
 import com.example.gestionRH.service.DepartementService;
 import com.example.gestionRH.service.EmployeService;
 import com.example.gestionRH.utils.EncrytedPasswordUtils;
@@ -50,6 +49,15 @@ public class EmployeController {
 	@Transactional
 	public ModelAndView saveEmploye(@ModelAttribute Employe employe) {
 		employe.setPassword(EncrytedPasswordUtils.encrytePassword(employe.getPassword()));
+		if(employe.getUsername().equals("admin")) {
+			Role role = new Role();
+			role.setId(2);
+			employe.setRole(role);
+		} else {
+			Role role = new Role();
+			role.setId(1);
+			employe.setRole(role);
+		}
 		employeService.update(employe);
 		return new ModelAndView("redirect:/employes");
 	}
@@ -112,9 +120,7 @@ public class EmployeController {
 	@PostMapping("/addSousJacent")
 	@Transactional
 	public ModelAndView addSousJacent(@ModelAttribute Employe sousJacent, @RequestParam(value = "idSup") Long idSup) {
-		System.out.println("======"+sousJacent.getId());
 		Employe employe = employeService.findById(idSup);
-		
 		employe.getSousjacents().add(sousJacent);
 		employeService.update(employe);
 		return new ModelAndView("redirect:/employes/listSousJacents" + "?id=" + idSup);

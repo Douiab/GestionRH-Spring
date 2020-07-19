@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <meta charset="utf-8" />
 
 <th:block th:include="fragments/header"></th:block>
@@ -8,14 +7,7 @@
 <body class="">
 	<div class="wrapper ">
 
-		<div th:if="${employe.id == null}">
-			<th:block th:include="fragments/sidebarLeft :: active('addEmploye')"></th:block>
-		</div>
-
-		<div th:if="${employe.id != null}">
-			<th:block
-				th:include="fragments/sidebarLeft :: active('updateEmploye')"></th:block>
-		</div>
+		<th:block th:include="fragments/sidebarLeft :: active('profil')"></th:block>
 
 		<div class="main-panel">
 			<!-- Navbar -->
@@ -27,34 +19,31 @@
 						<div class="col-md-8">
 							<div class="card">
 								<div class="card-header card-header-primary">
-									<h4 class="card-title">Edit Profile</h4>
-									<p class="card-category">Complete your profile</p>
+									<h4 class="card-title" th:text="${userInfo.lastName} + ' ' + ${userInfo.firstName}">Profile</h4>
+									<p class="card-category">My profile</p>
 								</div>
 								<div class="card-body">
-									<form th:action="@{/employes/saveEmploye}" method="post"
-										name='f' th:object="${employe}">
+									<form action="" method="" name='f' th:object="${userInfo}">
 										<div class="row">
 											<div class="col-md-5">
 												<div class="form-group">
 													<label class="bmd-label-floating">Nom </label> <input
-														th:field="*{id}" th:value="''" type="hidden"
-														class="form-control"> <input
 														th:field="*{lastName}" type="text" th:value="''"
-														class="form-control">
+														class="form-control" disabled>
 												</div>
 											</div>
 											<div class="col-md-3">
 												<div class="form-group">
 													<label class="bmd-label-floating">Prénom</label> <input
 														th:field="*{firstName}" type="text" th:value="''"
-														class="form-control">
+														class="form-control" disabled>
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="form-group">
 													<label class="bmd-label-floating">Email address</label> <input
 														th:field="*{email}" th:value="''" type="email"
-														class="form-control">
+														class="form-control" disabled>
 												</div>
 											</div>
 										</div>
@@ -63,23 +52,17 @@
 												<div class="form-group">
 													<label class="bmd-label-floating">Username</label> <input
 														th:field="*{username}" th:value="''" type="text"
-														class="form-control">
+														class="form-control" disabled>
 												</div>
 											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label class="bmd-label-floating">Password</label> <input
-														th:field="*{password}" th:value="''" type="password"
-														class="form-control">
-												</div>
-											</div>
+											
 										</div>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
 													<label class="bmd-label-floating">Adress</label> <input
 														th:field="*{adress}" type="text" th:value="''"
-														class="form-control">
+														class="form-control" disabled>
 												</div>
 											</div>
 										</div>
@@ -88,7 +71,7 @@
 												<div class="form-group">
 													<label class="bmd-label-floating">City</label> <input
 														th:field="*{city}" type="text" th:value="''"
-														class="form-control">
+														class="form-control" disabled>
 												</div>
 											</div>
 
@@ -96,39 +79,26 @@
 												<div class="form-group">
 													<label class="bmd-label-floating">Country</label> <input
 														th:field="*{country}" type="text" th:value="''"
-														class="form-control">
+														class="form-control" disabled>
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="form-group">
 													<label class="bmd-label-floating">Postal Code</label> <input
 														th:field="*{postalCode}" type="text" th:value="''"
-														class="form-control">
+														class="form-control" disabled>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<select class="selectpicker"
 														data-style="btn btn-primary btn-round" title="Departement"
-														th:field="*{departement.id}">
+														th:field="*{departement.id}" disabled>
 														<option th:each="departement : ${allDepartements}"
 															th:value="${departement.id}"
 															th:text="${departement.label} + '-' + ${departement.type}"></option>
 
 													</select>
-
-												</div>
-												<div class="col-md-6">
-													<div th:each="type : ${T(com.example.gestionRH.enumeration.TypeEmploye).values()}" class="form-check form-check-radio form-check-inline">
-														<label class="form-check-label"> <input
-															class="form-check-input" type="radio"
-															name="typeEmploye" th:field="*{typeEmploye}" 
-															th:value="${type}" th:text="${type}"> <span class="circle"> <span
-																class="check"></span>
-														</span>
-														</label>
-													</div>
-													
 												</div>
 											</div>
 										</div>
@@ -145,8 +115,7 @@
 												</div>
 											</div>
 										</div>
-										<button type="submit" class="btn btn-primary pull-right"
-											value="Valider">Save</button>
+
 										<div class="clearfix"></div>
 									</form>
 								</div>

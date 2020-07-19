@@ -1,4 +1,4 @@
-package com.example.gestionRH.service;
+package com.example.gestionRH.service.imp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,23 +29,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		Employe appUser = this.appUserDAO.findByUsername(username).get();
 
 		if (appUser == null) {
-			System.out.println("User not found! " + username);
 			throw new UsernameNotFoundException("User " + username + " was not found in the database");
 		}
 
-		System.out.println("Found User: " + appUser);
-
 		// [ROLE_USER, ROLE_ADMIN,..]
-		System.out.println("rooooole===============" + appUser.getId());
 		String roleNames = appUser.getRole().getName();
 
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 		if (roleNames != null) {
-//            for (String role : roleNames) {
-			// ROLE_USER, ROLE_ADMIN,..
 			GrantedAuthority authority = new SimpleGrantedAuthority(roleNames);
 			grantList.add(authority);
-//            }
 		}
 
 		UserDetails userDetails = (UserDetails) new User(appUser.getUsername(), //

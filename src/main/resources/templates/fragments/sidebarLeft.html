@@ -11,26 +11,28 @@
 		</div>
 		<div class="sidebar-wrapper">
 			<ul class="nav">
-				<li class="nav-item  "><a class="nav-link"
+				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item  "><a class="nav-link"
 					href="./dashboard.html"> <i class="material-icons">dashboard</i>
 						<p>Dashboard</p>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="./user.html">
+				<li
+					th:class="${activeroute == 'profil'}? 'nav-item active' : 'nav-item'"><a
+					class="nav-link" href="/profil">
 						<i class="material-icons">person</i>
 						<p>User Profile</p>
 				</a></li>
-				<li
+				<li sec:authorize="hasRole('ROLE_ADMIN')"
 					th:class="${activeroute == 'employes'}? 'nav-item active' : 'nav-item'"><a
 					class="nav-link" href="/employes"> <i class="material-icons">content_paste</i>
 						<p>liste employes</p>
 				</a></li>
-				<li
+				<li sec:authorize="hasRole('ROLE_ADMIN')"
 					th:class="${activeroute == 'departements'}? 'nav-item active' : 'nav-item'"><a
 					class="nav-link" href="/departements"> <i
 						class="material-icons">library_books</i>
 						<p>liste departemets</p>
 				</a></li>
-				<li
+				<li sec:authorize="hasRole('ROLE_ADMIN')"
 					th:class="${activeroute == 'addEmploye'}? 'nav-item active' : 'nav-item'"><a
 					class="nav-link" href="/employes/addEmploye"> <i
 						class="material-icons">bubble_chart</i>

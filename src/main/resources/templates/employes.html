@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <meta charset="utf-8" />
 
 <th:block th:include="fragments/header"></th:block>
@@ -32,6 +33,7 @@
 												<th>Email</th>
 												<th>City</th>
 												<th>Country</th>
+												<th>Type</th>
 												<th>Departement</th>
 												<th></th>
 											</thead>
@@ -50,10 +52,12 @@
 													<td
 														th:text="${element.country != null} ? ${element.country} : '_'"></td>
 													<td
+														th:text="${element.typeEmploye != null} ? ${element.typeEmploye} : '_'"></td>
+													<td
 														th:text="${element?.departement?.label != null} ? ${element?.departement?.label}  : '_'"></td>
 													<td class="td-actions text-right">
-														<button type="button" rel="tooltip"
-															title="list SousJacents"
+														<button th:if="${element.typeEmploye == T(com.example.gestionRH.enumeration.TypeEmploye).Manager}"
+															type="button" rel="tooltip" title="list SousJacents"
 															class="btn btn-primary btn-link btn-sm">
 															<a
 																th:href="@{'/employes/listSousJacents?id=' + ${element.id}}"><i

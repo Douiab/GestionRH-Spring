@@ -7,7 +7,6 @@ public class EncrytedPasswordUtils {
     // Encryte Password with BCryptPasswordEncoder
     public static String encrytePassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println("=======*****" + password + " encode " + encoder.encode(password));
         return encoder.encode(password);
         
     }

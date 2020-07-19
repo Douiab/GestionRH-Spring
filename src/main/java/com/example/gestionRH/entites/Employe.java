@@ -6,17 +6,18 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.example.gestionRH.enumeration.TypeEmploye;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -27,6 +28,7 @@ public class Employe implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	@NotNull
     @Column(unique = true, nullable = false)
     private String username;
     @Email
@@ -56,6 +58,9 @@ public class Employe implements Serializable {
     @Size(max = 10)
     @Column(name = "postal_code", length = 10)
     private String postalCode;
+    
+    @Enumerated(EnumType.STRING)
+	private TypeEmploye typeEmploye;
     
     @ManyToOne
     @JsonIgnoreProperties("employes")
@@ -151,5 +156,12 @@ public class Employe implements Serializable {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	public TypeEmploye getTypeEmploye() {
+		return typeEmploye;
+	}
+	public void setTypeEmploye(TypeEmploye typeEmploye) {
+		this.typeEmploye = typeEmploye;
+	}
+	
 
 }
