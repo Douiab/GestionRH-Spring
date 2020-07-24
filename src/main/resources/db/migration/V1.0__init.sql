@@ -35,12 +35,16 @@ CREATE TABLE IF NOT EXISTS `employe` (
     `id`   bigint       NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `username`  varchar(255) NOT NULL,
     `password`  varchar(255) NOT NULL,
-     `role_id` bigint  NOT NULL
+    `email`  varchar(255) DEFAULT NULL,
+    `first_name`  varchar(255) DEFAULT NULL,
+    `last_name`  varchar(255) DEFAULT NULL,
+    `departement_id`  bigint  DEFAULT NULL,
+    `role_id` bigint  NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = UTF8;
 
-insert into employe(username, password, role_id)
-VALUES ('admin', '$2a$10$ziXAaSVV0QUp9HLmORgoqONsReRxZWbGsxoxjd6DYrCBr05pQ2Tay', '2');
+insert into employe(username, password, role_id, email, first_name, last_name, departement_id)
+VALUES ('admin', '$2a$10$ziXAaSVV0QUp9HLmORgoqONsReRxZWbGsxoxjd6DYrCBr05pQ2Tay', '2', 'admin@gmail.com', 'adminPrenom', 'adminNom', '1');
 
 
 
