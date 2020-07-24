@@ -66,6 +66,10 @@ public class Employe implements Serializable {
     @JsonIgnoreProperties("employes")
     private Departement departement;
     
+    @ManyToOne
+    @JsonIgnoreProperties("employes")
+    private Remuneration remuneration;
+    
     @OneToMany
     private Set<Employe> sousjacents = new HashSet<>();
     
@@ -162,6 +166,11 @@ public class Employe implements Serializable {
 	public void setTypeEmploye(TypeEmploye typeEmploye) {
 		this.typeEmploye = typeEmploye;
 	}
-	
+	public Remuneration getRemuneration() {
+		return remuneration;
+	}
+	public void setRemuneration(Remuneration remuneration) {
+		this.remuneration = remuneration;
+	}	
 
 }

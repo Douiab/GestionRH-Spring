@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.gestionRH.entites.Departement;
 import com.example.gestionRH.entites.Employe;
+import com.example.gestionRH.entites.Remuneration;
 import com.example.gestionRH.entites.Role;
 import com.example.gestionRH.service.DepartementService;
 import com.example.gestionRH.service.EmployeService;
+import com.example.gestionRH.service.RemunerationService;
 import com.example.gestionRH.utils.EncrytedPasswordUtils;
 
 @Controller
@@ -32,11 +34,21 @@ public class EmployeController {
 	@Autowired
 	DepartementService departementService;
 	
+	@Autowired
+	RemunerationService remunerationService;
+	
 	@ModelAttribute("allDepartements")
 	public List<Departement> allDepartements() {
 		List<Departement> departements = departementService.getAll();
 	    return departements;
 	}
+	
+	@ModelAttribute("allRemuneration")
+	public List<Remuneration> allRemuneration() {
+		List<Remuneration> remunerations = remunerationService.getAll();
+	    return remunerations;
+	}
+
 
 	@GetMapping
 	public String getAll(Model model) {

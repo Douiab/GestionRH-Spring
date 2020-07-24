@@ -130,6 +130,19 @@
 													</div>
 													
 												</div>
+												
+												<div class="col-md-6">
+													<div th:each="remuneration : ${allRemuneration}" class="form-check form-check-radio form-check-inline">
+														<label class="form-check-label"> <input
+															class="form-check-input" type="radio"
+															name="remuneration" th:field="*{remuneration.id}" 
+															th:value="${remuneration.id}" th:text="${remuneration.name}"> <span class="circle"> <span
+																class="check"></span>
+														</span>
+														</label>
+													</div>
+													
+												</div>
 											</div>
 										</div>
 										<div class="row">

@@ -32,9 +32,9 @@
 												<th>Prénom</th>
 												<th>Email</th>
 												<th>City</th>
-												<th>Country</th>
 												<th>Type</th>
 												<th>Departement</th>
+												<th>Remuneration</th>
 												<th></th>
 											</thead>
 											<tbody>
@@ -50,11 +50,11 @@
 													<td
 														th:text="${element.city != null} ? ${element.city} : '_'"></td>
 													<td
-														th:text="${element.country != null} ? ${element.country} : '_'"></td>
-													<td
 														th:text="${element.typeEmploye != null} ? ${element.typeEmploye} : '_'"></td>
 													<td
 														th:text="${element?.departement?.label != null} ? ${element?.departement?.label}  : '_'"></td>
+													<td
+														th:text="${element?.remuneration?.name != null} ? ${element?.remuneration?.name}  : '_'"></td>
 													<td class="td-actions text-right">
 														<button th:if="${element.typeEmploye == T(com.example.gestionRH.enumeration.TypeEmploye).Manager}"
 															type="button" rel="tooltip" title="list SousJacents"
